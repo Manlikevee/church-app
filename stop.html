@@ -1,0 +1,749 @@
+		<div class="elementor-widget-container">
+
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat|Roboto+Slab:300'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.min.css'>
+
+										<style>
+											
+										.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5));
+}
+
+.hero-slider {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.hero-slider .carousel-cell {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.hero-slider .carousel-cell .inner {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  text-align: center;
+}
+.hero-slider .carousel-cell .inner .subtitle {
+  font-size: 29px;
+  line-height: 1.2em;
+  font-weight: 200;
+  font-style: italic;
+  letter-spacing: 3px;
+  color: white
+  
+}
+
+.hero-slider .carousel-cell .inner .title {
+  font-family: "Parisienne", cursive;
+  font-size: 3rem;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  font-weight: 500;
+  color: white;
+
+
+  touch-action: manipulation;
+    font-family: Parisienne;
+    font-size: 91px;
+    font-weight: 400;
+    color: rgb(255, 255, 255);
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0px;
+    line-height: 91px;
+}
+
+.hero-slider .carousel-cell .inner .btn {
+  border: 1px solid #fff;
+  padding: 14px 18px;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  
+}
+.hero-slider .carousel-cell .inner .btn:hover {
+  background: #fff;
+  color: #000;
+}
+.hero-slider .flickity-prev-next-button {
+  width: 80px;
+  height: 80px;
+  background: transparent;
+}
+.hero-slider .flickity-prev-next-button:hover {
+  background: transparent;
+}
+.hero-slider .flickity-prev-next-button .arrow {
+  fill: white;
+}
+.hero-slider .flickity-page-dots {
+  bottom: 30px;
+}
+.hero-slider .flickity-page-dots .dot {
+  width: 30px;
+  height: 4px;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.5);
+  border: 0 solid white;
+  border-radius: 0;
+}
+.hero-slider .flickity-page-dots .dot.is-selected {
+  background: #f4db76;
+  border: 0 solid #f4db76;
+}
+
+
+
+/* Tablets */
+@media (max-width: 992px) {
+  .hero-slider .carousel-cell .inner .title {
+    font-size: 50px;
+    line-height: 1.2em;
+  }
+  .hero-slider .carousel-cell .inner .subtitle {
+    font-size: 20px;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) {
+  .hero-slider .carousel-cell .inner .title {
+    font-size: 36px;
+    line-height: 1.2em;
+  }
+  .hero-slider .carousel-cell .inner .subtitle {
+    font-size: 18px;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+  .hero-slider .carousel-cell .inner .title {
+    font-size: 28px;
+    line-height: 1.2em;
+  }
+  .hero-slider .carousel-cell .inner .subtitle {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+}
+
+										</style>
+
+<div class="hero-slider" data-carousel style="display: none;">
+  <div class="carousel-cell" style="background-image:url(SLM.jpg);">
+    <div class="overlay"></div>
+    <div class="inner">
+			<img src="{% static 'hors.png' %}" alt="HOR Logo" class="hero-logo">
+      <h3 class="subtitle">HOR BEAUTY CLINIC</h3>
+      <h2 class="title">Certified Excellence <br> in Beauty & Wellness </h2>
+      <a href="https://flickity.metafizzy.co/" target="_blank" class="btn">Tell me more</a>
+    </div>
+  </div>
+
+
+<div class="carousel-cell" style="background-image:url(XX.jpg);">
+    <div class="overlay"></div>
+    <div class="inner">
+			<img src="{% static 'hors.png' %}" alt="HOR Logo" class="hero-logo">
+      <h3 class="subtitle">HOR BEAUTY CLINIC</h3>
+      <h2 class="title">Advanced Treatments <br> for Lasting Confidence</h2>
+      <a href="https://flickity.metafizzy.co/" target="_blank" class="btn">Tell me more</a>
+    </div>
+  </div>
+
+
+<div class="carousel-cell" style="background-image:url(Home-section-3.jpg);">
+    <div class="overlay"></div>
+    <div class="inner">
+		<img src="{% static 'hors.png' %}" alt="HOR Logo" class="hero-logo">
+      <h3 class="subtitle">HOR BEAUTY CLINIC</h3>
+      <h2 class="title">Where Science <br> Meets Beauty</h2>
+      <a href="https://flickity.metafizzy.co/" target="_blank" class="btn">Tell me more</a>
+    </div>
+  </div>
+</div>
+ <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'>
+
+<section id="module">
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+
+      <!-- Slide 1 -->
+      <div class="swiper-slide">
+		
+        <div class="content ova-title template_1">
+			<img src="{% static 'hors.png' %}" alt="HOR Logo" class="hero-logo">
+			   <span class="description">HOR BEAUTY CLINIC</span>
+          <span class="title">Certified Excellence in Beauty & Wellness</span>
+       
+          <a href="#">Tell me more</a>
+        </div>
+        <div class="img">
+			   <div class="overlay"></div>
+          <img src="{% static 'SLM.jpg' %}" alt="Certified Excellence in Beauty & Wellness" />
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="swiper-slide" loading="lazy">
+        <div class="content">
+			<img src="{% static 'hors.png' %}" alt="HOR Logo" class="hero-logo">
+			    <span class="description">HOR BEAUTY CLINIC</span>
+          <span class="title">Advanced Treatments for Lasting Confidence</span>
+      
+          <a href="#">Tell me more</a>
+        </div>
+        <div class="img">
+			   <div class="overlay"></div>
+          <img src="{% static 'XX.jpg' %}" alt="Advanced Treatments for Lasting Confidence" />
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide" loading="lazy">
+        <div class="content ">
+			<img src="{% static 'hors.png' %}" alt="HOR Logo" class="hero-logo">
+			    <span class="description">HOR BEAUTY CLINIC</span>
+          <span class="title">Where Science Meets Beauty</span>
+      
+          <a href="#">Tell me more</a>
+        </div>
+        <div class="img">
+			   <div class="overlay"></div>
+          <img src="{% static 'Home-section-3.jpg' %}" alt="Where Science Meets Beauty" />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Swiper Navigation -->
+    <div class="swiper-button-next">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
+        <path d="M18 8L22 12L18 16" />
+        <path d="M2 12H22" />
+      </svg>
+    </div>
+    <div class="swiper-button-prev">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-left-icon lucide-move-left">
+        <path d="M6 8L2 12L6 16" />
+        <path d="M2 12H22" />
+      </svg>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+
+<style>
+	
+#module {
+  height: 80vh;
+}
+#module .swiper {
+  width: 100%;
+  height: 100%;
+}
+#module .swiper .swiper-slide {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+#module .swiper .swiper-slide .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4rem;
+  color: var(--swiper-theme-color);
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+}
+
+
+@media (width > 700px) {
+  #module .swiper .swiper-slide .content {
+    gap: 2rem;
+  }
+}
+#module .swiper .swiper-slide .content .titles {
+  font-size: 38px;
+  text-transform: none;
+  text-shadow: rgb(0, 0, 0) 0 0 3px;
+  width: 625px;
+  max-width: 100%;
+}
+
+.hero-slider .carousel-cell .inner .subtitle {
+  font-size: 29px;
+  line-height: 1.2em;
+  font-weight: 200;
+  font-style: italic;
+  letter-spacing: 3px;
+  color: white
+  
+}
+
+#module .swiper .swiper-slide .content .title {
+  font-family: "Parisienne", cursive;
+  font-size: 3rem;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: white;
+
+
+  touch-action: manipulation;
+    font-family: Parisienne;
+    font-size: 91px;
+    font-weight: 400;
+    color: rgb(255, 255, 255);
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: 0px;
+    line-height: 91px;
+}
+
+
+.swiper-button-next, .swiper-button-prev{
+	color: #cc9933;
+}
+
+@media (max-width: 768px) {
+  #module .swiper .swiper-slide .content .title {
+    font-size: 36px;
+    line-height: 1.2em;
+  }
+  .hero-slider .carousel-cell .inner .subtitle {
+    font-size: 18px;
+  }
+}
+
+/* Mobile Portrait */
+
+#module .swiper .swiper-slide .content .description {
+  font-size: 29px;
+  line-height: 1.2em;
+  font-weight: 200;
+  font-style: italic;
+  letter-spacing: 3px;
+  color: white;
+}
+
+
+@media (max-width: 480px) {
+#module .swiper .swiper-slide .content .title{
+    font-size: 28px;
+    line-height: 1.2em;
+  }
+  #module .swiper .swiper-slide .content .description {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+}
+@media (width > 700px) {
+  #module .swiper .swiper-slide .content .title {
+    font-size: 58px;
+  }
+  
+}
+
+#module .swiper .swiper-slide .content a {
+  background-color: var(--swiper-theme-color);
+  padding: 11px 20px;
+  font-size: 12px;
+  background: #fff;
+  color: #05141f;
+  min-width: 80px;
+  font-weight: 600;
+  text-decoration: none;
+}
+@media (width > 700px) {
+  #module .swiper .swiper-slide .content a {
+    padding: 21px 40px;
+    font-size: 14px;
+  }
+}
+#module .swiper .swiper-slide .content a:hover {
+  text-decoration: underline;
+}
+#module .swiper .swiper-slide .img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#module .swiper .swiper-slide .img .pixel-transition {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+#module .swiper .swiper-slide .img .pixel-transition div {
+  background-color: rgb(255, 255, 255);
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(1) {
+  animation: fade 350ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(6) {
+  animation: fade 350ms 100ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(11) {
+  animation: fade 350ms 150ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(16) {
+  animation: fade 350ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(2) {
+  animation: fade 350ms 250ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(7) {
+  animation: fade 350ms 200ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(12) {
+  animation: fade 350ms 280ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(17) {
+  animation: fade 350ms 200ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(3) {
+  animation: fade 350ms 300ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(8) {
+  animation: fade 350ms 400ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(13) {
+  animation: fade 350ms 450ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(18) {
+  animation: fade 350ms 300ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(4) {
+  animation: fade 350ms 550ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(9) {
+  animation: fade 350ms 530ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(14) {
+  animation: fade 350ms 600ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(19) {
+  animation: fade 350ms 560ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(5) {
+  animation: fade 350ms 700ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(10) {
+  animation: fade 350ms 800ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(15) {
+  animation: fade 350ms 850ms forwards;
+}
+#module .swiper .swiper-slide .img .pixel-transition div:nth-child(20) {
+  animation: fade 350ms 700ms forwards;
+}
+#module .swiper .swiper-slide .img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+}
+#module .swiper .swiper-button-next,
+#module .swiper .swiper-button-prev {
+  overflow: hidden;
+  border-radius: 40px;
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+}
+@media (width > 700px) {
+  #module .swiper .swiper-button-next,
+  #module .swiper .swiper-button-prev {
+    border-radius: 84px;
+    width: 84px;
+    height: 84px;
+  }
+}
+#module .swiper .swiper-button-next::before,
+#module .swiper .swiper-button-prev::before {
+  content: "";
+  background: #05141f;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#module .swiper .swiper-button-next svg,
+#module .swiper .swiper-button-prev svg {
+  position: relative;
+  display: block;
+  width: 20px;
+}
+@media (width > 700px) {
+  #module .swiper .swiper-button-next svg,
+  #module .swiper .swiper-button-prev svg {
+    width: 30px;
+  }
+}
+#module .swiper .swiper-button-next:hover,
+#module .swiper .swiper-button-prev:hover {
+  opacity: 1;
+}
+#module .swiper .swiper-button-next::after,
+#module .swiper .swiper-button-prev::after {
+  display: none;
+}
+#module .swiper .swiper-button-next {
+  right: 2rem;
+}
+#module .swiper .swiper-button-prev {
+  left: 2rem;
+}
+#module .swiper .swiper-pagination {
+  bottom: 1.5rem;
+}
+#module .swiper .swiper-pagination .swiper-pagination-bullet {
+  border-radius: 0;
+  width: 35px;
+  height: 4px;
+  margin: 0 5px;
+  background-color: #fff;
+}
+@media (width > 700px) {
+  #module .swiper .swiper-pagination .swiper-pagination-bullet {
+    width: 45px;
+  }
+}
+#module .swiper .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #fff;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}	
+
+@media screen and (max-width: 568px) {
+  #module {
+	height: max-content ;
+	min-height: 320px;
+
+  }
+	
+}
+
+.hero-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+/* On mobile screens (below 768px) */
+@media (max-width: 768px) {
+  .hero-logo {
+    width: 60px;
+    height: 60px;
+		margin-top: 20px;
+	padding-top: 20px;
+  }
+}
+
+/* Even smaller on very small phones */
+@media (max-width: 480px) {
+  .hero-logo {
+	margin-top: 20px;
+	padding-top: 20px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+</style>
+
+<script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'></script>
+
+
+<script>
+	var swiper = new Swiper(".mySwiper", {
+  effect: "fade",
+  crossFade: true,
+  loop: true,
+  autoplay: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev"
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true
+  },
+  on: {
+    slideChangeTransitionStart: function () {
+      let activeSlide = document.querySelector(".swiper-slide-active");
+
+      let createPixelContainer = document.createElement("div");
+      createPixelContainer.classList.add("pixel-transition");
+      createPixelContainer.innerHTML = `
+        <div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div>
+      `;
+      activeSlide.querySelector(".img").appendChild(createPixelContainer);
+      setTimeout(() => {
+        createPixelContainer.remove();
+      }, 1500);
+    },
+    slideChangeTransitionEnd: function () {}
+  }
+});</script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.pkgd.min.js'></script>
+<script>
+var options = {
+  accessibility: true,
+  prevNextButtons: true,
+  pageDots: true,
+  setGallerySize: false,
+  autoPlay: 3000, // autoplay every 3 seconds
+  pauseAutoPlayOnHover: true, // optional: pause when hovering
+  wrapAround: true, // optional: infinite loop
+  arrowShape: {
+    x0: 10,
+    x1: 60,
+    y1: 50,
+    x2: 60,
+    y2: 45,
+    x3: 15
+  }
+};
+
+var carousel = document.querySelector('[data-carousel]');
+var slides = document.getElementsByClassName('carousel-cell');
+var flkty = new Flickity(carousel, options);
+
+flkty.on('scroll', function () {
+  flkty.slides.forEach(function (slide, i) {
+    var image = slides[i];
+    var x = (slide.target + flkty.x) * -1/3;
+    image.style.backgroundPosition = x + 'px';
+  });
+});
+
+
+</script>
+
+
+										<div class="wp-block-themepunch-revslider d-none" style="display: none;">
+											<p class="rs-p-wp-fix"></p>
+											<sr7-module data-alias="home-1" data-id="1" id="SR7_1_1"
+												class="rs-ov-hidden" data-version="6.7.23">
+												<sr7-adjuster></sr7-adjuster>
+												<sr7-content>
+													<sr7-slide id="SR7_1_1-1" data-key="1">
+														<sr7-bg id="SR7_1_1-1-4" class="sr7-layer"><noscript><img
+																	decoding="async"
+																	src="{% static 'SLM.jpg' %}"
+																	alt="" title="Hero-Section-3"></noscript></sr7-bg>
+														<sr7-txt id="SR7_1_1-1-0" class="sr7-layer">HOR BEAUTY CLINIC</sr7-txt>
+														<h2 id="SR7_1_1-1-1" class="sr7-layer">Certified Excellence <br> in Beauty & Wellness
+														</h2>
+														<a id="SR7_1_1-1-2" class="sr7-layer"
+															href="#our-services/"
+															target="_self">Discover More</a>
+													</sr7-slide>
+													<sr7-slide id="SR7_1_1-2" data-key="2">
+														<sr7-bg id="SR7_1_1-2-5" class="sr7-layer"><noscript><img
+																	decoding="async"
+																	src="{% static '#wp-content/uploads/2025/05/Hero-Section-2.jpg' %}"
+																	alt="" title="Hero-Section-2"></noscript></sr7-bg>
+														<sr7-txt id="SR7_1_1-2-0" class="sr7-layer">HOR BEAUTY CLINIC</sr7-txt>
+														<h2 id="SR7_1_1-2-1" class="sr7-layer">Advanced Treatments <br> for Lasting Confidence
+														</h2>
+														<a id="SR7_1_1-2-2" class="sr7-layer"
+															href="#our-services/"
+															target="_self">Discover More</a>
+													</sr7-slide>
+													<sr7-slide id="SR7_1_1-3" data-key="3">
+														<sr7-bg id="SR7_1_1-3-6" class="sr7-layer"><noscript><img
+																	decoding="async"
+																	src="{% static 'XX.jpg' %}"
+																	alt="" title="Hero-Section-1"></noscript></sr7-bg>
+														<sr7-txt id="SR7_1_1-3-0" class="sr7-layer">JNY BEAUTY AND
+															SPA</sr7-txt>
+														<h3 id="SR7_1_1-3-1" class="sr7-layer">Where Science <br> Meets Beauty
+														</h3>
+														<a id="SR7_1_1-3-2" class="sr7-layer"
+															href="#our-services/"
+															target="_self">Discover More</a>
+													</sr7-slide>
+													<sr7-slide id="SR7_1_1-10" data-key="10">
+													</sr7-slide>
+												</sr7-content>
+												<image_lists >
+													<img data-src="hors.png"
+														data-libid="6706" data-lib="medialibrary"
+														title="HOR BEAUTY CLINIC Logo" width="0" height="0"
+														data-dbsrc="{% static 'Ly9qbnliZWF1dHlhbmRzcGEuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDI1LzA1L0pueS1CZWF1dHktYW5kLVNwYS1Mb2dvLnBuZw==' %}">
+													<img data-src="SLM.jpg"
+														data-libid="7064" data-lib="medialibrary" title="Hero-Section-3"
+														width="0" height="0"
+														data-dbsrc="{% static 'Ly9qbnliZWF1dHlhbmRzcGEuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDI1LzA1L0hlcm8tU2VjdGlvbi0zLmpwZw==' %}">
+													<img data-src="Home-section-3.jpg"
+														data-libid="7063" data-lib="medialibrary" title="Hero-Section-2"
+														width="0" height="0"
+														data-dbsrc="{% static 'Ly9qbnliZWF1dHlhbmRzcGEuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDI1LzA1L0hlcm8tU2VjdGlvbi0yLmpwZw==' %}">
+													<img loading="lazy"
+														data-src="XX.jpg"
+														data-libid="7062" data-lib="medialibrary" title="Hero-Section-1"
+														width="0" height="0"
+														data-dbsrc="{% static 'Ly9qbnliZWF1dHlhbmRzcGEuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDI1LzA1L0hlcm8tU2VjdGlvbi0xLmpwZw==' %}">
+												</image_lists>
+											</sr7-module>
+												<script>
+					SR7.PMH ??={}; SR7.PMH["SR7_1_1"] = {cn:100,state:false,fn: function() { if (_tpt!==undefined && _tpt.prepareModuleHeight !== undefined) {  _tpt.prepareModuleHeight({id:"SR7_1_1",el:[725.99,725.99,725,620,620],type:'standard',shdw:'0',gh:[726,726,726,620,620],gw:[1201,1201,1024,778,480],vpt:['-100px','-100px','-100px','-100px','-100px'],size:{fullWidth:true, fullHeight:false},mh:'0',onh:0,onw:0,bg:{color:'{"type":"solid","orig":"#27252a","string":"rgba(39, 37, 42, 1)"}'},plType:'4',plColor:'#d2b245'});   SR7.PMH["SR7_1_1"].state=true;} else if(SR7.PMH["SR7_1_1"].cn-->0)	setTimeout( SR7.PMH["SR7_1_1"].fn,19);}};SR7.PMH["SR7_1_1" ].fn();
+				</script>
+										</div>
+
+									</div>
