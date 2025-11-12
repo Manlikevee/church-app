@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Compressor & Downloader</title>
+  <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 400px;
+      max-width: 90%;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #2f3640;
+    }
+
+    input[type=file] {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px dashed #ccc;
+      border-radius: 8px;
+      width: 100%;
+      background: #fafafa;
+      cursor: pointer;
+    }
+
+    .preview {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .preview img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid #ddd;
+    }
+
+    button {
+      background-color: #0984e3;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #74b9ff;
+    }
+
+    .log {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #636e72;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Image Compressor</h2>
+    <input type="file" id="imageInput" multiple accept="image/*" />
+    <button id="compressBtn">Compress & Download</button>
+    <div class="preview" id="preview"></div>
+    <div class="log" id="log"></div>
+  </div>
+
+  <script>
+    const imageInput = document.getElementById("imageInput");
+    const preview = document.getElementById("preview");
+    const compressBtn = document.getElementById("compressBtn");
+    const log = document.getElementById("log");
+
+    let selectedFiles = [];
+
+    imageInput.addEventListener("change", (e) => {
+      preview.innerHTML = "";
+      selectedFiles = Array.from(e.target.files);
+      selectedFiles.forEach((file) => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        preview.appendChild(img);
+      });
+    });
+
+    compressBtn.addEventListener("click", async () => {
+      if (!selectedFiles.length) {
+        alert("Please select some images first!");
+        return;
+      }
+
+      log.innerText = "Compressing images, please wait...";
+      const zip = new JSZip();
+      const jsonData = [];
+
+      for (const file of selectedFiles) {
+        if (!file.type.startsWith("image/")) continue;
+
+        try {
+          const options = {
+            maxSizeMB: 0.1, // target ~100KB
+            maxWidthOrHeight: 1080,
+            useWebWorker: true,
+            initialQuality: 0.6
+          };
+
+          const compressedFile = await imageCompression(file, options);
+          const blob = compressedFile;
+          const fileName = "compressed_" + file.name;
+          const arrayBuffer = await blob.arrayBuffer();
+          zip.file(fileName, arrayBuffer);
+
+          jsonData.push({ name: file.name, compressedPath: fileName });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      // Add JSON file
+      zip.file("images.json", JSON.stringify(jsonData, null, 2));
+
+      // Generate ZIP and trigger download
+      zip.generateAsync({ type: "blob" }).then((content) => {
+        saveAs(content, "compressed_images.zip");
+        log.innerText = "All images compressed and downloaded!";
+      });
+    });
+  </script>
+</body>
+</html>
