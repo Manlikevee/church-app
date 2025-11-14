@@ -1386,9 +1386,33 @@
 														class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6660 current_page_item menu-item-6710 dropdown active">
 														<a title="Home" href="index.html">Home</a>
 													</li>
-													<li id="menu-item-6888"
-														class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6888 dropdown">
-														<a title="About Us" href="about.html">About Us</a>
+															<li id="menu-item-6888"
+														class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6888 dropdown">
+														<a title="About Us"
+															href="#">About Us</a>
+						<li id="menu-item-6888"
+														class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-6888 dropdown">
+														<a title="About Us"
+															href="#">About Us</a>
+														<ul class="sub-menu" role="menu">
+															<li id="menu-item-7132"
+																class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7132 dropdown">
+																<a title="Client Story Details"
+																	href="about.html">About Us
+																	</a></li>
+
+																			<li id="menu-item-7132"
+																class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7132 dropdown">
+																<a title="Client Story Details"
+																	href="ourteam.html">Our Team
+																	</a></li>
+																					<li id="menu-item-7132"
+																class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7132 dropdown">
+																<a title="Client Story Details"
+																	href="projects.html">Our Projects
+																	</a></li>
+														</ul>
+													</li>
 													</li>
 													<li id="menu-item-6711"
 														class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6711 dropdown">
@@ -1584,13 +1608,19 @@
 			<br>
 
 
-			<section id="gallery" class="gallery-section">
+<section id="gallery" class="gallery-section">
   <div class="container">
     <h2 class="gallery-title">Our Gallery</h2>
     <p class="gallery-subtitle">Moments captured in our ministry — each photo tells a story of faith, community, and devotion.</p>
 
-    <div class="gallery-grid" id="galleryGrid">
-      <!-- Images will be injected here via JS -->
+    <!-- CATEGORY VIEW -->
+    <div id="galleryCategories" class="category-grid"></div>
+
+    <!-- CATEGORY IMAGES VIEW -->
+    <div id="galleryView" class="gallery-view" style="display:none;">
+      <button id="backBtn" class="back-button">← Back to Categories</button>
+      <h3 id="categoryTitle"></h3>
+      <div class="gallery-grid" id="galleryGrid"></div>
     </div>
   </div>
 
@@ -1603,7 +1633,9 @@
 
 
 
+
 <style>
+/* MAIN SECTION */
 .gallery-section {
   padding: 70px 20px;
   background-color: #fafafa;
@@ -1622,6 +1654,82 @@
   margin: 0 auto 40px;
   font-size: 1rem;
   line-height: 1.6;
+}
+
+/* CATEGORY GRID */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* INDIVIDUAL CARD */
+.category-card {
+  position: relative;
+  display: grid;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+}
+
+/* CARD IMAGE */
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  grid-area: 1 / 1;
+  filter: brightness(65%);
+}
+
+/* TITLE OVERLAY */
+.category-card-title {
+    /* grid-area: 1 / 1; */
+    align-self: end;
+    padding: 15px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: black;
+    background: white;
+    z-index: 9999999;
+    position: absolute;
+    width: 80%;
+    margin: auto;
+    padding: 3px;
+    /* align-self: center; */
+    margin-bottom: 10px;
+    justify-self: center;
+}
+
+/* GALLERY VIEW */
+.gallery-view {
+  margin-top: 20px;
+}
+
+.back-button {
+  background: #a1222b;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.back-button:hover {
+  background: #881b23;
 }
 
 .gallery-grid {
@@ -1644,7 +1752,7 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* Popup Lightbox */
+/* LIGHTBOX */
 .lightbox {
   display: none;
   position: fixed;
@@ -1682,624 +1790,90 @@
 }
 </style>
 
-<script>
-const galleryImages = 
-[
-  {
-    "name": "1-IMG_4093.jpg",
-    "compressedPath": "compressed_1-IMG_4093.jpg"
-  },
-  {
-    "name": "2-IMG_4094.jpg",
-    "compressedPath": "compressed_2-IMG_4094.jpg"
-  },
-  {
-    "name": "3-IMG_4095.jpg",
-    "compressedPath": "compressed_3-IMG_4095.jpg"
-  },
-  {
-    "name": "4-IMG_4096.jpg",
-    "compressedPath": "compressed_4-IMG_4096.jpg"
-  },
-  {
-    "name": "5-IMG_4097.jpg",
-    "compressedPath": "compressed_5-IMG_4097.jpg"
-  },
-  {
-    "name": "6-IMG_4098.jpg",
-    "compressedPath": "compressed_6-IMG_4098.jpg"
-  },
-  {
-    "name": "7-IMG_4099.jpg",
-    "compressedPath": "compressed_7-IMG_4099.jpg"
-  },
-  {
-    "name": "8-IMG_4102.jpg",
-    "compressedPath": "compressed_8-IMG_4102.jpg"
-  },
-  {
-    "name": "9-IMG_4103.jpg",
-    "compressedPath": "compressed_9-IMG_4103.jpg"
-  },
-  {
-    "name": "10-IMG_4104.jpg",
-    "compressedPath": "compressed_10-IMG_4104.jpg"
-  },
-  {
-    "name": "11-IMG_4105.jpg",
-    "compressedPath": "compressed_11-IMG_4105.jpg"
-  },
-  {
-    "name": "13-IMG_4107.jpg",
-    "compressedPath": "compressed_13-IMG_4107.jpg"
-  },
-  {
-    "name": "14-IMG_4108.jpg",
-    "compressedPath": "compressed_14-IMG_4108.jpg"
-  },
-  {
-    "name": "15-IMG_4109.jpg",
-    "compressedPath": "compressed_15-IMG_4109.jpg"
-  },
-  {
-    "name": "16-IMG_4110.jpg",
-    "compressedPath": "compressed_16-IMG_4110.jpg"
-  },
-  {
-    "name": "17-IMG_4111.jpg",
-    "compressedPath": "compressed_17-IMG_4111.jpg"
-  },
-  {
-    "name": "18-IMG_4112.jpg",
-    "compressedPath": "compressed_18-IMG_4112.jpg"
-  },
-  {
-    "name": "19-IMG_4113.jpg",
-    "compressedPath": "compressed_19-IMG_4113.jpg"
-  },
-  {
-    "name": "20-IMG_4114.jpg",
-    "compressedPath": "compressed_20-IMG_4114.jpg"
-  },
-  {
-    "name": "21-IMG_4115.jpg",
-    "compressedPath": "compressed_21-IMG_4115.jpg"
-  },
-  {
-    "name": "22-IMG_4120.jpg",
-    "compressedPath": "compressed_22-IMG_4120.jpg"
-  },
-  {
-    "name": "24-IMG_4122.jpg",
-    "compressedPath": "compressed_24-IMG_4122.jpg"
-  },
-  {
-    "name": "27-IMG_4125.jpg",
-    "compressedPath": "compressed_27-IMG_4125.jpg"
-  },
-  {
-    "name": "28-IMG_4127.jpg",
-    "compressedPath": "compressed_28-IMG_4127.jpg"
-  },
-  {
-    "name": "29-IMG_4128.jpg",
-    "compressedPath": "compressed_29-IMG_4128.jpg"
-  },
-  {
-    "name": "30-IMG_4132.jpg",
-    "compressedPath": "compressed_30-IMG_4132.jpg"
-  },
-  {
-    "name": "31-IMG_4133.jpg",
-    "compressedPath": "compressed_31-IMG_4133.jpg"
-  },
-  {
-    "name": "33-IMG_4136.jpg",
-    "compressedPath": "compressed_33-IMG_4136.jpg"
-  },
-  {
-    "name": "35-IMG_4138.jpg",
-    "compressedPath": "compressed_35-IMG_4138.jpg"
-  },
-  {
-    "name": "36-IMG_4139.jpg",
-    "compressedPath": "compressed_36-IMG_4139.jpg"
-  },
-  {
-    "name": "37-IMG_4140.jpg",
-    "compressedPath": "compressed_37-IMG_4140.jpg"
-  },
-  {
-    "name": "38-IMG_4141.jpg",
-    "compressedPath": "compressed_38-IMG_4141.jpg"
-  },
-  {
-    "name": "39-IMG_4142.jpg",
-    "compressedPath": "compressed_39-IMG_4142.jpg"
-  },
-  {
-    "name": "41-IMG_4144.jpg",
-    "compressedPath": "compressed_41-IMG_4144.jpg"
-  },
-  {
-    "name": "43-IMG_4146.jpg",
-    "compressedPath": "compressed_43-IMG_4146.jpg"
-  },
-  {
-    "name": "44-IMG_4148.jpg",
-    "compressedPath": "compressed_44-IMG_4148.jpg"
-  },
-  {
-    "name": "45-IMG_4149.jpg",
-    "compressedPath": "compressed_45-IMG_4149.jpg"
-  },
-  {
-    "name": "46-IMG_4150.jpg",
-    "compressedPath": "compressed_46-IMG_4150.jpg"
-  },
-  {
-    "name": "48-IMG_4152.jpg",
-    "compressedPath": "compressed_48-IMG_4152.jpg"
-  },
-  {
-    "name": "50-IMG_4154.jpg",
-    "compressedPath": "compressed_50-IMG_4154.jpg"
-  },
-  {
-    "name": "51-IMG_4155.jpg",
-    "compressedPath": "compressed_51-IMG_4155.jpg"
-  },
-  {
-    "name": "52-IMG_4156.jpg",
-    "compressedPath": "compressed_52-IMG_4156.jpg"
-  },
-  {
-    "name": "53-IMG_4157.jpg",
-    "compressedPath": "compressed_53-IMG_4157.jpg"
-  },
-  {
-    "name": "55-IMG_4159.jpg",
-    "compressedPath": "compressed_55-IMG_4159.jpg"
-  },
-  {
-    "name": "56-IMG_4161.jpg",
-    "compressedPath": "compressed_56-IMG_4161.jpg"
-  },
-  {
-    "name": "57-IMG_4163.jpg",
-    "compressedPath": "compressed_57-IMG_4163.jpg"
-  },
-  {
-    "name": "58-IMG_4164.jpg",
-    "compressedPath": "compressed_58-IMG_4164.jpg"
-  },
-  {
-    "name": "59-IMG_4165.jpg",
-    "compressedPath": "compressed_59-IMG_4165.jpg"
-  },
-  {
-    "name": "60-IMG_4166.jpg",
-    "compressedPath": "compressed_60-IMG_4166.jpg"
-  },
-  {
-    "name": "61-IMG_4169.jpg",
-    "compressedPath": "compressed_61-IMG_4169.jpg"
-  },
-  {
-    "name": "62-IMG_4170.jpg",
-    "compressedPath": "compressed_62-IMG_4170.jpg"
-  },
-  {
-    "name": "63-IMG_4171.jpg",
-    "compressedPath": "compressed_63-IMG_4171.jpg"
-  },
-  {
-    "name": "64-IMG_4172.jpg",
-    "compressedPath": "compressed_64-IMG_4172.jpg"
-  },
-  {
-    "name": "65-IMG_4173.jpg",
-    "compressedPath": "compressed_65-IMG_4173.jpg"
-  },
-  {
-    "name": "66-IMG_4174.jpg",
-    "compressedPath": "compressed_66-IMG_4174.jpg"
-  },
-  {
-    "name": "67-IMG_4175.jpg",
-    "compressedPath": "compressed_67-IMG_4175.jpg"
-  },
-  {
-    "name": "68-IMG_4176.jpg",
-    "compressedPath": "compressed_68-IMG_4176.jpg"
-  },
-  {
-    "name": "69-IMG_4177.jpg",
-    "compressedPath": "compressed_69-IMG_4177.jpg"
-  },
-  {
-    "name": "71-IMG_4180.jpg",
-    "compressedPath": "compressed_71-IMG_4180.jpg"
-  },
-  {
-    "name": "72-IMG_4181.jpg",
-    "compressedPath": "compressed_72-IMG_4181.jpg"
-  },
-  {
-    "name": "73-IMG_4183.jpg",
-    "compressedPath": "compressed_73-IMG_4183.jpg"
-  },
-  {
-    "name": "75-IMG_4186.jpg",
-    "compressedPath": "compressed_75-IMG_4186.jpg"
-  },
-  {
-    "name": "76-IMG_4188.jpg",
-    "compressedPath": "compressed_76-IMG_4188.jpg"
-  },
-  {
-    "name": "78-IMG_4191.jpg",
-    "compressedPath": "compressed_78-IMG_4191.jpg"
-  },
-  {
-    "name": "80-IMG_4193.jpg",
-    "compressedPath": "compressed_80-IMG_4193.jpg"
-  },
-  {
-    "name": "81-IMG_4207.jpg",
-    "compressedPath": "compressed_81-IMG_4207.jpg"
-  },
-  {
-    "name": "82-IMG_4208.jpg",
-    "compressedPath": "compressed_82-IMG_4208.jpg"
-  },
-  {
-    "name": "83-IMG_4210.jpg",
-    "compressedPath": "compressed_83-IMG_4210.jpg"
-  },
-  {
-    "name": "84-IMG_4211.jpg",
-    "compressedPath": "compressed_84-IMG_4211.jpg"
-  },
-  {
-    "name": "86-IMG_4215.jpg",
-    "compressedPath": "compressed_86-IMG_4215.jpg"
-  },
-  {
-    "name": "87-IMG_4216.jpg",
-    "compressedPath": "compressed_87-IMG_4216.jpg"
-  },
-  {
-    "name": "89-IMG_4218.jpg",
-    "compressedPath": "compressed_89-IMG_4218.jpg"
-  },
-  {
-    "name": "90-IMG_4219.jpg",
-    "compressedPath": "compressed_90-IMG_4219.jpg"
-  },
-  {
-    "name": "91-IMG_4220.jpg",
-    "compressedPath": "compressed_91-IMG_4220.jpg"
-  },
-  {
-    "name": "92-IMG_4222.jpg",
-    "compressedPath": "compressed_92-IMG_4222.jpg"
-  },
-  {
-    "name": "93-IMG_4223.jpg",
-    "compressedPath": "compressed_93-IMG_4223.jpg"
-  },
-  {
-    "name": "94-IMG_4224.jpg",
-    "compressedPath": "compressed_94-IMG_4224.jpg"
-  },
-  {
-    "name": "96-IMG_4227.jpg",
-    "compressedPath": "compressed_96-IMG_4227.jpg"
-  },
-  {
-    "name": "97-IMG_4228.jpg",
-    "compressedPath": "compressed_97-IMG_4228.jpg"
-  },
-  {
-    "name": "101-IMG_4232.jpg",
-    "compressedPath": "compressed_101-IMG_4232.jpg"
-  },
-  {
-    "name": "102-IMG_4233.jpg",
-    "compressedPath": "compressed_102-IMG_4233.jpg"
-  },
-  {
-    "name": "103-IMG_4234.jpg",
-    "compressedPath": "compressed_103-IMG_4234.jpg"
-  },
-  {
-    "name": "104-IMG_4235.jpg",
-    "compressedPath": "compressed_104-IMG_4235.jpg"
-  },
-  {
-    "name": "106-IMG_4239.jpg",
-    "compressedPath": "compressed_106-IMG_4239.jpg"
-  },
-  {
-    "name": "107-IMG_4240.jpg",
-    "compressedPath": "compressed_107-IMG_4240.jpg"
-  },
-  {
-    "name": "108-IMG_4241.jpg",
-    "compressedPath": "compressed_108-IMG_4241.jpg"
-  },
-  {
-    "name": "109-IMG_4242.jpg",
-    "compressedPath": "compressed_109-IMG_4242.jpg"
-  },
-  {
-    "name": "110-IMG_4243.jpg",
-    "compressedPath": "compressed_110-IMG_4243.jpg"
-  },
-  {
-    "name": "111-IMG_4245.jpg",
-    "compressedPath": "compressed_111-IMG_4245.jpg"
-  },
-  {
-    "name": "114-IMG_4250.jpg",
-    "compressedPath": "compressed_114-IMG_4250.jpg"
-  },
-  {
-    "name": "115-IMG_4251.jpg",
-    "compressedPath": "compressed_115-IMG_4251.jpg"
-  },
-  {
-    "name": "116-IMG_4252.jpg",
-    "compressedPath": "compressed_116-IMG_4252.jpg"
-  },
-  {
-    "name": "119-IMG_4255.jpg",
-    "compressedPath": "compressed_119-IMG_4255.jpg"
-  },
-  {
-    "name": "120-IMG_4256.jpg",
-    "compressedPath": "compressed_120-IMG_4256.jpg"
-  },
-  {
-    "name": "124-IMG_4263.jpg",
-    "compressedPath": "compressed_124-IMG_4263.jpg"
-  },
-  {
-    "name": "125-IMG_4265.jpg",
-    "compressedPath": "compressed_125-IMG_4265.jpg"
-  },
-  {
-    "name": "126-IMG_4266.jpg",
-    "compressedPath": "compressed_126-IMG_4266.jpg"
-  },
-  {
-    "name": "128-IMG_4269.jpg",
-    "compressedPath": "compressed_128-IMG_4269.jpg"
-  },
-  {
-    "name": "129-IMG_4270.jpg",
-    "compressedPath": "compressed_129-IMG_4270.jpg"
-  },
-  {
-    "name": "130-IMG_4274.jpg",
-    "compressedPath": "compressed_130-IMG_4274.jpg"
-  },
-  {
-    "name": "132-IMG_4276.jpg",
-    "compressedPath": "compressed_132-IMG_4276.jpg"
-  },
-  {
-    "name": "133-IMG_4277.jpg",
-    "compressedPath": "compressed_133-IMG_4277.jpg"
-  },
-  {
-    "name": "135-IMG_4279.jpg",
-    "compressedPath": "compressed_135-IMG_4279.jpg"
-  },
-  {
-    "name": "136-IMG_4281.jpg",
-    "compressedPath": "compressed_136-IMG_4281.jpg"
-  },
-  {
-    "name": "137-IMG_4282.jpg",
-    "compressedPath": "compressed_137-IMG_4282.jpg"
-  },
-  {
-    "name": "138-IMG_4283.jpg",
-    "compressedPath": "compressed_138-IMG_4283.jpg"
-  },
-  {
-    "name": "139-IMG_4284.jpg",
-    "compressedPath": "compressed_139-IMG_4284.jpg"
-  },
-  {
-    "name": "140-IMG_4285.jpg",
-    "compressedPath": "compressed_140-IMG_4285.jpg"
-  },
-  {
-    "name": "141-IMG_4287.jpg",
-    "compressedPath": "compressed_141-IMG_4287.jpg"
-  },
-  {
-    "name": "142-IMG_4288.jpg",
-    "compressedPath": "compressed_142-IMG_4288.jpg"
-  },
-  {
-    "name": "143-IMG_4289.jpg",
-    "compressedPath": "compressed_143-IMG_4289.jpg"
-  },
-  {
-    "name": "144-IMG_4291.jpg",
-    "compressedPath": "compressed_144-IMG_4291.jpg"
-  },
-  {
-    "name": "145-IMG_4292.jpg",
-    "compressedPath": "compressed_145-IMG_4292.jpg"
-  },
-  {
-    "name": "146-IMG_4293.jpg",
-    "compressedPath": "compressed_146-IMG_4293.jpg"
-  },
-  {
-    "name": "147-IMG_4294.jpg",
-    "compressedPath": "compressed_147-IMG_4294.jpg"
-  },
-  {
-    "name": "148-IMG_4296.jpg",
-    "compressedPath": "compressed_148-IMG_4296.jpg"
-  },
-  {
-    "name": "149-IMG_4297.jpg",
-    "compressedPath": "compressed_149-IMG_4297.jpg"
-  },
-  {
-    "name": "150-IMG_4298.jpg",
-    "compressedPath": "compressed_150-IMG_4298.jpg"
-  },
-  {
-    "name": "151-IMG_4299.jpg",
-    "compressedPath": "compressed_151-IMG_4299.jpg"
-  },
-  {
-    "name": "152-IMG_4300.jpg",
-    "compressedPath": "compressed_152-IMG_4300.jpg"
-  },
-  {
-    "name": "153-IMG_4301.jpg",
-    "compressedPath": "compressed_153-IMG_4301.jpg"
-  },
-  {
-    "name": "155-IMG_4303.jpg",
-    "compressedPath": "compressed_155-IMG_4303.jpg"
-  },
-  {
-    "name": "156-IMG_4304.jpg",
-    "compressedPath": "compressed_156-IMG_4304.jpg"
-  },
-  {
-    "name": "157-IMG_4305.jpg",
-    "compressedPath": "compressed_157-IMG_4305.jpg"
-  },
-  {
-    "name": "159-IMG_4307.jpg",
-    "compressedPath": "compressed_159-IMG_4307.jpg"
-  },
-  {
-    "name": "162-IMG_4310.jpg",
-    "compressedPath": "compressed_162-IMG_4310.jpg"
-  },
-  {
-    "name": "163-IMG_4312.jpg",
-    "compressedPath": "compressed_163-IMG_4312.jpg"
-  },
-  {
-    "name": "164-IMG_4313.jpg",
-    "compressedPath": "compressed_164-IMG_4313.jpg"
-  },
-  {
-    "name": "165-IMG_4314.jpg",
-    "compressedPath": "compressed_165-IMG_4314.jpg"
-  },
-  {
-    "name": "166-IMG_4315.jpg",
-    "compressedPath": "compressed_166-IMG_4315.jpg"
-  },
-  {
-    "name": "167-IMG_4316.jpg",
-    "compressedPath": "compressed_167-IMG_4316.jpg"
-  },
-  {
-    "name": "168-IMG_4317.jpg",
-    "compressedPath": "compressed_168-IMG_4317.jpg"
-  },
-  {
-    "name": "169-IMG_4318.jpg",
-    "compressedPath": "compressed_169-IMG_4318.jpg"
-  },
-  {
-    "name": "171-IMG_4320.jpg",
-    "compressedPath": "compressed_171-IMG_4320.jpg"
-  },
-  {
-    "name": "172-IMG_4321.jpg",
-    "compressedPath": "compressed_172-IMG_4321.jpg"
-  },
-  {
-    "name": "173-IMG_4322.jpg",
-    "compressedPath": "compressed_173-IMG_4322.jpg"
-  },
-  {
-    "name": "174-IMG_4323.jpg",
-    "compressedPath": "compressed_174-IMG_4323.jpg"
-  },
-  {
-    "name": "175-IMG_4324.jpg",
-    "compressedPath": "compressed_175-IMG_4324.jpg"
-  },
-  {
-    "name": "176-IMG_4325.jpg",
-    "compressedPath": "compressed_176-IMG_4325.jpg"
-  },
-  {
-    "name": "178-IMG_4327.jpg",
-    "compressedPath": "compressed_178-IMG_4327.jpg"
-  },
-  {
-    "name": "180-IMG_4329.jpg",
-    "compressedPath": "compressed_180-IMG_4329.jpg"
-  },
-  {
-    "name": "181-IMG_4330.jpg",
-    "compressedPath": "compressed_181-IMG_4330.jpg"
-  },
-  {
-    "name": "182-IMG_4331.jpg",
-    "compressedPath": "compressed_182-IMG_4331.jpg"
-  },
-  {
-    "name": "183-IMG_4332.jpg",
-    "compressedPath": "compressed_183-IMG_4332.jpg"
-  },
-  {
-    "name": "184-IMG_4333.jpg",
-    "compressedPath": "compressed_184-IMG_4333.jpg"
-  },
-  {
-    "name": "185-IMG_4334.jpg",
-    "compressedPath": "compressed_185-IMG_4334.jpg"
-  },
-  {
-    "name": "186-IMG_4335.jpg",
-    "compressedPath": "compressed_186-IMG_4335.jpg"
-  },
-  {
-    "name": "187-IMG_4336.jpg",
-    "compressedPath": "compressed_187-IMG_4336.jpg"
-  },
-  {
-    "name": "188-IMG_4337.jpg",
-    "compressedPath": "compressed_188-IMG_4337.jpg"
-  },
-  {
-    "name": "189-IMG_4338.jpg",
-    "compressedPath": "compressed_189-IMG_4338.jpg"
-  },
-  {
-    "name": "190-IMG_4339.jpg",
-    "compressedPath": "compressed_190-IMG_4339.jpg"
-  }
-];
 
-const galleryGrid = document.getElementById("galleryGrid");
-galleryImages.forEach(img => {
-  const imageEl = document.createElement("img");
-  imageEl.src = `photo/${img.compressedPath}`;
-  imageEl.alt = img.name;
-  imageEl.addEventListener("click", () => openLightbox(`photo/${img.compressedPath}`));
-  galleryGrid.appendChild(imageEl);
+
+<script>
+/* ---------------------------
+    1. YOUR GALLERY DATA
+----------------------------*/
+const galleryImages = [ { "name": "1-IMG_4093.jpg", "compressedPath": "compressed_1-IMG_4093.jpg" }, { "name": "2-IMG_4094.jpg", "compressedPath": "compressed_2-IMG_4094.jpg" }, { "name": "3-IMG_4095.jpg", "compressedPath": "compressed_3-IMG_4095.jpg" }, { "name": "4-IMG_4096.jpg", "compressedPath": "compressed_4-IMG_4096.jpg" }, { "name": "5-IMG_4097.jpg", "compressedPath": "compressed_5-IMG_4097.jpg" }, { "name": "6-IMG_4098.jpg", "compressedPath": "compressed_6-IMG_4098.jpg" }, { "name": "7-IMG_4099.jpg", "compressedPath": "compressed_7-IMG_4099.jpg" }, { "name": "8-IMG_4102.jpg", "compressedPath": "compressed_8-IMG_4102.jpg" }, { "name": "9-IMG_4103.jpg", "compressedPath": "compressed_9-IMG_4103.jpg" }, { "name": "10-IMG_4104.jpg", "compressedPath": "compressed_10-IMG_4104.jpg" }, { "name": "11-IMG_4105.jpg", "compressedPath": "compressed_11-IMG_4105.jpg" }, { "name": "13-IMG_4107.jpg", "compressedPath": "compressed_13-IMG_4107.jpg" }, { "name": "14-IMG_4108.jpg", "compressedPath": "compressed_14-IMG_4108.jpg" }, { "name": "15-IMG_4109.jpg", "compressedPath": "compressed_15-IMG_4109.jpg" }, { "name": "16-IMG_4110.jpg", "compressedPath": "compressed_16-IMG_4110.jpg" }, { "name": "17-IMG_4111.jpg", "compressedPath": "compressed_17-IMG_4111.jpg" }, { "name": "18-IMG_4112.jpg", "compressedPath": "compressed_18-IMG_4112.jpg" }, { "name": "19-IMG_4113.jpg", "compressedPath": "compressed_19-IMG_4113.jpg" }, { "name": "20-IMG_4114.jpg", "compressedPath": "compressed_20-IMG_4114.jpg" }, { "name": "21-IMG_4115.jpg", "compressedPath": "compressed_21-IMG_4115.jpg" }, { "name": "22-IMG_4120.jpg", "compressedPath": "compressed_22-IMG_4120.jpg" }, { "name": "24-IMG_4122.jpg", "compressedPath": "compressed_24-IMG_4122.jpg" }, { "name": "27-IMG_4125.jpg", "compressedPath": "compressed_27-IMG_4125.jpg" }, { "name": "28-IMG_4127.jpg", "compressedPath": "compressed_28-IMG_4127.jpg" }, { "name": "29-IMG_4128.jpg", "compressedPath": "compressed_29-IMG_4128.jpg" }, { "name": "30-IMG_4132.jpg", "compressedPath": "compressed_30-IMG_4132.jpg" }, { "name": "31-IMG_4133.jpg", "compressedPath": "compressed_31-IMG_4133.jpg" }, { "name": "33-IMG_4136.jpg", "compressedPath": "compressed_33-IMG_4136.jpg" }, { "name": "35-IMG_4138.jpg", "compressedPath": "compressed_35-IMG_4138.jpg" }, { "name": "36-IMG_4139.jpg", "compressedPath": "compressed_36-IMG_4139.jpg" }, { "name": "37-IMG_4140.jpg", "compressedPath": "compressed_37-IMG_4140.jpg" }, { "name": "38-IMG_4141.jpg", "compressedPath": "compressed_38-IMG_4141.jpg" }, { "name": "39-IMG_4142.jpg", "compressedPath": "compressed_39-IMG_4142.jpg" }, { "name": "41-IMG_4144.jpg", "compressedPath": "compressed_41-IMG_4144.jpg" }, { "name": "43-IMG_4146.jpg", "compressedPath": "compressed_43-IMG_4146.jpg" }, { "name": "44-IMG_4148.jpg", "compressedPath": "compressed_44-IMG_4148.jpg" }, { "name": "45-IMG_4149.jpg", "compressedPath": "compressed_45-IMG_4149.jpg" }, { "name": "46-IMG_4150.jpg", "compressedPath": "compressed_46-IMG_4150.jpg" }, { "name": "48-IMG_4152.jpg", "compressedPath": "compressed_48-IMG_4152.jpg" }, { "name": "50-IMG_4154.jpg", "compressedPath": "compressed_50-IMG_4154.jpg" }, { "name": "51-IMG_4155.jpg", "compressedPath": "compressed_51-IMG_4155.jpg" }, { "name": "52-IMG_4156.jpg", "compressedPath": "compressed_52-IMG_4156.jpg" }, { "name": "53-IMG_4157.jpg", "compressedPath": "compressed_53-IMG_4157.jpg" }, { "name": "55-IMG_4159.jpg", "compressedPath": "compressed_55-IMG_4159.jpg" }, { "name": "56-IMG_4161.jpg", "compressedPath": "compressed_56-IMG_4161.jpg" }, { "name": "57-IMG_4163.jpg", "compressedPath": "compressed_57-IMG_4163.jpg" }, { "name": "58-IMG_4164.jpg", "compressedPath": "compressed_58-IMG_4164.jpg" }, { "name": "59-IMG_4165.jpg", "compressedPath": "compressed_59-IMG_4165.jpg" }, { "name": "60-IMG_4166.jpg", "compressedPath": "compressed_60-IMG_4166.jpg" }, { "name": "61-IMG_4169.jpg", "compressedPath": "compressed_61-IMG_4169.jpg" }, { "name": "62-IMG_4170.jpg", "compressedPath": "compressed_62-IMG_4170.jpg" }, { "name": "63-IMG_4171.jpg", "compressedPath": "compressed_63-IMG_4171.jpg" }, { "name": "64-IMG_4172.jpg", "compressedPath": "compressed_64-IMG_4172.jpg" }, { "name": "65-IMG_4173.jpg", "compressedPath": "compressed_65-IMG_4173.jpg" }, { "name": "66-IMG_4174.jpg", "compressedPath": "compressed_66-IMG_4174.jpg" }, { "name": "67-IMG_4175.jpg", "compressedPath": "compressed_67-IMG_4175.jpg" }, { "name": "68-IMG_4176.jpg", "compressedPath": "compressed_68-IMG_4176.jpg" }, { "name": "69-IMG_4177.jpg", "compressedPath": "compressed_69-IMG_4177.jpg" }, { "name": "71-IMG_4180.jpg", "compressedPath": "compressed_71-IMG_4180.jpg" }, { "name": "72-IMG_4181.jpg", "compressedPath": "compressed_72-IMG_4181.jpg" }, { "name": "73-IMG_4183.jpg", "compressedPath": "compressed_73-IMG_4183.jpg" }, { "name": "75-IMG_4186.jpg", "compressedPath": "compressed_75-IMG_4186.jpg" }, { "name": "76-IMG_4188.jpg", "compressedPath": "compressed_76-IMG_4188.jpg" }, { "name": "78-IMG_4191.jpg", "compressedPath": "compressed_78-IMG_4191.jpg" }, { "name": "80-IMG_4193.jpg", "compressedPath": "compressed_80-IMG_4193.jpg" }, { "name": "81-IMG_4207.jpg", "compressedPath": "compressed_81-IMG_4207.jpg" }, { "name": "82-IMG_4208.jpg", "compressedPath": "compressed_82-IMG_4208.jpg" }, { "name": "83-IMG_4210.jpg", "compressedPath": "compressed_83-IMG_4210.jpg" }, { "name": "84-IMG_4211.jpg", "compressedPath": "compressed_84-IMG_4211.jpg" }, { "name": "86-IMG_4215.jpg", "compressedPath": "compressed_86-IMG_4215.jpg" }, { "name": "87-IMG_4216.jpg", "compressedPath": "compressed_87-IMG_4216.jpg" }, { "name": "89-IMG_4218.jpg", "compressedPath": "compressed_89-IMG_4218.jpg" }, { "name": "90-IMG_4219.jpg", "compressedPath": "compressed_90-IMG_4219.jpg" }, { "name": "91-IMG_4220.jpg", "compressedPath": "compressed_91-IMG_4220.jpg" }, { "name": "92-IMG_4222.jpg", "compressedPath": "compressed_92-IMG_4222.jpg" }, { "name": "93-IMG_4223.jpg", "compressedPath": "compressed_93-IMG_4223.jpg" }, { "name": "94-IMG_4224.jpg", "compressedPath": "compressed_94-IMG_4224.jpg" }, { "name": "96-IMG_4227.jpg", "compressedPath": "compressed_96-IMG_4227.jpg" }, { "name": "97-IMG_4228.jpg", "compressedPath": "compressed_97-IMG_4228.jpg" }, { "name": "101-IMG_4232.jpg", "compressedPath": "compressed_101-IMG_4232.jpg" }, { "name": "102-IMG_4233.jpg", "compressedPath": "compressed_102-IMG_4233.jpg" }, { "name": "103-IMG_4234.jpg", "compressedPath": "compressed_103-IMG_4234.jpg" }, { "name": "104-IMG_4235.jpg", "compressedPath": "compressed_104-IMG_4235.jpg" }, { "name": "106-IMG_4239.jpg", "compressedPath": "compressed_106-IMG_4239.jpg" }, { "name": "107-IMG_4240.jpg", "compressedPath": "compressed_107-IMG_4240.jpg" }, { "name": "108-IMG_4241.jpg", "compressedPath": "compressed_108-IMG_4241.jpg" }, { "name": "109-IMG_4242.jpg", "compressedPath": "compressed_109-IMG_4242.jpg" }, { "name": "110-IMG_4243.jpg", "compressedPath": "compressed_110-IMG_4243.jpg" }, { "name": "111-IMG_4245.jpg", "compressedPath": "compressed_111-IMG_4245.jpg" }, { "name": "114-IMG_4250.jpg", "compressedPath": "compressed_114-IMG_4250.jpg" }, { "name": "115-IMG_4251.jpg", "compressedPath": "compressed_115-IMG_4251.jpg" }, { "name": "116-IMG_4252.jpg", "compressedPath": "compressed_116-IMG_4252.jpg" }, { "name": "119-IMG_4255.jpg", "compressedPath": "compressed_119-IMG_4255.jpg" }, { "name": "120-IMG_4256.jpg", "compressedPath": "compressed_120-IMG_4256.jpg" }, { "name": "124-IMG_4263.jpg", "compressedPath": "compressed_124-IMG_4263.jpg" }, { "name": "125-IMG_4265.jpg", "compressedPath": "compressed_125-IMG_4265.jpg" }, { "name": "126-IMG_4266.jpg", "compressedPath": "compressed_126-IMG_4266.jpg" }, { "name": "128-IMG_4269.jpg", "compressedPath": "compressed_128-IMG_4269.jpg" }, { "name": "129-IMG_4270.jpg", "compressedPath": "compressed_129-IMG_4270.jpg" }, { "name": "130-IMG_4274.jpg", "compressedPath": "compressed_130-IMG_4274.jpg" }, { "name": "132-IMG_4276.jpg", "compressedPath": "compressed_132-IMG_4276.jpg" }, { "name": "133-IMG_4277.jpg", "compressedPath": "compressed_133-IMG_4277.jpg" }, { "name": "135-IMG_4279.jpg", "compressedPath": "compressed_135-IMG_4279.jpg" }, { "name": "136-IMG_4281.jpg", "compressedPath": "compressed_136-IMG_4281.jpg" }, { "name": "137-IMG_4282.jpg", "compressedPath": "compressed_137-IMG_4282.jpg" }, { "name": "138-IMG_4283.jpg", "compressedPath": "compressed_138-IMG_4283.jpg" }, { "name": "139-IMG_4284.jpg", "compressedPath": "compressed_139-IMG_4284.jpg" }, { "name": "140-IMG_4285.jpg", "compressedPath": "compressed_140-IMG_4285.jpg" }, { "name": "141-IMG_4287.jpg", "compressedPath": "compressed_141-IMG_4287.jpg" }, { "name": "142-IMG_4288.jpg", "compressedPath": "compressed_142-IMG_4288.jpg" }, { "name": "143-IMG_4289.jpg", "compressedPath": "compressed_143-IMG_4289.jpg" }, { "name": "144-IMG_4291.jpg", "compressedPath": "compressed_144-IMG_4291.jpg" }, { "name": "145-IMG_4292.jpg", "compressedPath": "compressed_145-IMG_4292.jpg" }, { "name": "146-IMG_4293.jpg", "compressedPath": "compressed_146-IMG_4293.jpg" }, { "name": "147-IMG_4294.jpg", "compressedPath": "compressed_147-IMG_4294.jpg" }, { "name": "148-IMG_4296.jpg", "compressedPath": "compressed_148-IMG_4296.jpg" }, { "name": "149-IMG_4297.jpg", "compressedPath": "compressed_149-IMG_4297.jpg" }, { "name": "150-IMG_4298.jpg", "compressedPath": "compressed_150-IMG_4298.jpg" }, { "name": "151-IMG_4299.jpg", "compressedPath": "compressed_151-IMG_4299.jpg" }, { "name": "152-IMG_4300.jpg", "compressedPath": "compressed_152-IMG_4300.jpg" }, { "name": "153-IMG_4301.jpg", "compressedPath": "compressed_153-IMG_4301.jpg" }, { "name": "155-IMG_4303.jpg", "compressedPath": "compressed_155-IMG_4303.jpg" }, { "name": "156-IMG_4304.jpg", "compressedPath": "compressed_156-IMG_4304.jpg" }, { "name": "157-IMG_4305.jpg", "compressedPath": "compressed_157-IMG_4305.jpg" }, { "name": "159-IMG_4307.jpg", "compressedPath": "compressed_159-IMG_4307.jpg" }, { "name": "162-IMG_4310.jpg", "compressedPath": "compressed_162-IMG_4310.jpg" }, { "name": "163-IMG_4312.jpg", "compressedPath": "compressed_163-IMG_4312.jpg" }, { "name": "164-IMG_4313.jpg", "compressedPath": "compressed_164-IMG_4313.jpg" }, { "name": "165-IMG_4314.jpg", "compressedPath": "compressed_165-IMG_4314.jpg" }, { "name": "166-IMG_4315.jpg", "compressedPath": "compressed_166-IMG_4315.jpg" }, { "name": "167-IMG_4316.jpg", "compressedPath": "compressed_167-IMG_4316.jpg" }, { "name": "168-IMG_4317.jpg", "compressedPath": "compressed_168-IMG_4317.jpg" }, { "name": "169-IMG_4318.jpg", "compressedPath": "compressed_169-IMG_4318.jpg" }, { "name": "171-IMG_4320.jpg", "compressedPath": "compressed_171-IMG_4320.jpg" }, { "name": "172-IMG_4321.jpg", "compressedPath": "compressed_172-IMG_4321.jpg" }, { "name": "173-IMG_4322.jpg", "compressedPath": "compressed_173-IMG_4322.jpg" }, { "name": "174-IMG_4323.jpg", "compressedPath": "compressed_174-IMG_4323.jpg" }, { "name": "175-IMG_4324.jpg", "compressedPath": "compressed_175-IMG_4324.jpg" }, { "name": "176-IMG_4325.jpg", "compressedPath": "compressed_176-IMG_4325.jpg" }, { "name": "178-IMG_4327.jpg", "compressedPath": "compressed_178-IMG_4327.jpg" }, { "name": "180-IMG_4329.jpg", "compressedPath": "compressed_180-IMG_4329.jpg" }, { "name": "181-IMG_4330.jpg", "compressedPath": "compressed_181-IMG_4330.jpg" }, { "name": "182-IMG_4331.jpg", "compressedPath": "compressed_182-IMG_4331.jpg" }, { "name": "183-IMG_4332.jpg", "compressedPath": "compressed_183-IMG_4332.jpg" }, { "name": "184-IMG_4333.jpg", "compressedPath": "compressed_184-IMG_4333.jpg" }, { "name": "185-IMG_4334.jpg", "compressedPath": "compressed_185-IMG_4334.jpg" }, { "name": "186-IMG_4335.jpg", "compressedPath": "compressed_186-IMG_4335.jpg" }, { "name": "187-IMG_4336.jpg", "compressedPath": "compressed_187-IMG_4336.jpg" }, { "name": "188-IMG_4337.jpg", "compressedPath": "compressed_188-IMG_4337.jpg" }, { "name": "189-IMG_4338.jpg", "compressedPath": "compressed_189-IMG_4338.jpg" }, { "name": "190-IMG_4339.jpg", "compressedPath": "compressed_190-IMG_4339.jpg" } ];
+
+/* ---------------------------
+    2. CATEGORY DATA
+----------------------------*/
+const categories = {
+  "Above All Names Concert": galleryImages  // all images go here
+};
+
+/* ---------------------------
+    3. RENDER CATEGORY CARDS
+----------------------------*/
+const categoryContainer = document.getElementById("galleryCategories");
+
+Object.keys(categories).forEach(categoryName => {
+  const images = categories[categoryName];
+
+  // Ensure category has images
+  if (!images || images.length === 0) return;
+
+  // pick random image as poster
+  const randomImg = images[Math.floor(Math.random() * images.length)].compressedPath;
+
+  const card = document.createElement("div");
+  card.classList.add("category-card");
+
+  // card content
+  const img = document.createElement("img");
+  img.src = `photo/${randomImg}`;
+  img.alt = categoryName;
+
+  const title = document.createElement("span");
+  title.classList.add("category-card-title");
+  title.textContent = categoryName;
+
+  // append
+  card.appendChild(img);
+  card.appendChild(title);
+
+  // click event
+  card.addEventListener("click", () => openCategory(categoryName));
+
+  // add to container
+  categoryContainer.appendChild(card);
 });
 
+/* ---------------------------
+    4. OPEN CATEGORY
+----------------------------*/
+function openCategory(categoryName) {
+  document.getElementById("galleryCategories").style.display = "none";
+  document.getElementById("galleryView").style.display = "block";
+  document.getElementById("categoryTitle").innerText = categoryName;
+
+  const galleryGrid = document.getElementById("galleryGrid");
+  galleryGrid.innerHTML = "";
+
+  categories[categoryName].forEach(img => {
+    const el = document.createElement("img");
+    el.src = `photo/${img.compressedPath}`;
+    el.alt = img.name;
+    el.addEventListener("click", () => openLightbox(`photo/${img.compressedPath}`));
+    galleryGrid.appendChild(el);
+  });
+}
+
+/* ---------------------------
+    5. BACK TO CATEGORIES
+----------------------------*/
+document.getElementById("backBtn").addEventListener("click", () => {
+  document.getElementById("galleryView").style.display = "none";
+  document.getElementById("galleryCategories").style.display = "grid";
+});
+
+
+/* ---------------------------
+    6. LIGHTBOX FUNCTIONALITY
+----------------------------*/
 function openLightbox(src) {
   document.getElementById("lightbox").style.display = "block";
   document.getElementById("lightboxImage").src = src;
@@ -2314,6 +1888,7 @@ window.onclick = function(e) {
   if (e.target === lightbox) lightbox.style.display = "none";
 };
 </script>
+
 
 
 		</div> <!-- /Inside Content -->
