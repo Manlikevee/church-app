@@ -2230,59 +2230,58 @@
 
 								<div class="elementor-element elementor-element-9cf789a elementor-widget elementor-widget-text-editor"
 									data-id="9cf789a" data-element_type="widget" data-widget_type="text-editor.default">
-									<div class="elementor-widget-container">
-
-<div class="elementor-widget-container">
-
 <section id="news" class="news-section">
   <div class="container">
+
     <h2 class="section-title">News & Updates</h2>
-    <p class="section-intro">
-      Stay connected with what’s happening at The Throne Room Ministry.
-    </p>
+    <p class="section-intro">Stay connected with what’s happening at The Throne Room Ministry.</p>
 
-    <div class="news-content">
+    <!-- BLOG GRID -->
+    <div class="blog-grid" id="blogGrid">
 
-      <h3>"Created For Fellowship" – Weekly Broadcast</h3>
-      <p>
-        We give God all glory for the grace to begin our brand new broadcast,
-        <strong>“Created For Fellowship.”</strong><br>
-        Join us <strong>LIVE on Facebook every Wednesday at 7:00 p.m.</strong>
-      </p>
+      <!-- BLOG CARD 1 -->
+      <div class="blog-card" data-blog="blog1">
+        <h3>"Created For Fellowship" – Weekly Broadcast</h3>
+        <p>Our brand new broadcast streaming live every Wednesday...</p>
+      </div>
 
-      <h3>Thank You to All TTRM Builders</h3>
-      <p>
-        We deeply appreciate all TTRM Builders for your financial and spiritual support.  
-        This memorable achievement would not have been possible without you.  
-        May God bless you richly and strengthen you spiritually in Jesus’ name.
-      </p>
+      <!-- BLOG CARD 2 -->
+      <div class="blog-card" data-blog="blog2">
+        <h3>Thank You to All TTRM Builders</h3>
+        <p>We deeply appreciate all TTRM Builders for your support...</p>
+      </div>
 
-      <h3>Praise in the Parks – Temporarily Suspended</h3>
-      <p>
-        Due to COVID restrictions, our monthly outdoor program
-        <strong>Praise in the Parks</strong> is temporarily suspended.  
-        We will notify everyone once restrictions are lifted.  
-        We thank all volunteers who have dedicated their time, effort, and resources.
-      </p>
+      <!-- BLOG CARD 3 -->
+      <div class="blog-card" data-blog="blog3">
+        <h3>Praise in the Parks – Suspended</h3>
+        <p>Due to COVID restrictions, our monthly outdoor program...</p>
+      </div>
 
-      <h3>Volunteer Opportunities</h3>
-      <p>
-        If you are interested in volunteering, kindly send us an email with your name
-        and the subject line <strong>“Volunteer”</strong>.  
-        A team member will reach out to you.
-      </p>
+      <!-- BLOG CARD 4 -->
+      <div class="blog-card" data-blog="blog4">
+        <h3>Volunteer Opportunities</h3>
+        <p>Send us an email with your name and the subject “Volunteer”...</p>
+      </div>
 
-      <h3>Stay Connected</h3>
-      <p>
-        Please continue to lift the Ministry in prayers.  
-        Updates will be posted regularly — keep checking the site or subscribe to our NewsFeed.
-      </p>
+      <!-- BLOG CARD 5 -->
+      <div class="blog-card" data-blog="blog5">
+        <h3>Stay Connected</h3>
+        <p>Continue to lift the Ministry in prayers...</p>
+      </div>
 
     </div>
+
+    <!-- BLOG DETAILS VIEW -->
+    <div class="blog-details" id="blogDetails">
+      <button class="back-btn" onclick="goBack()">← Back to News</button>
+      <div id="blogContent"></div>
+    </div>
+
   </div>
 </section>
 
 <style>
+/* SECTION */
 .news-section {
   padding: 60px 20px;
   background: #fff;
@@ -2292,7 +2291,6 @@
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 10px;
 }
 
 .section-intro {
@@ -2300,29 +2298,144 @@
   color: #555;
   max-width: 600px;
   margin: 0 auto 40px;
-  line-height: 1.6;
 }
 
-.news-content h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-top: 35px;
+/* BLOG GRID */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.blog-card {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.blog-card h3 {
+  color: #a1222b;
+  font-size: 1.2rem;
   margin-bottom: 10px;
-  color: #a1222b; /* ministry color accent */
 }
 
-.news-content p {
+.blog-card p {
   color: #444;
-  line-height: 1.7;
+  font-size: .95rem;
+}
+
+/* BLOG DETAILS */
+.blog-details {
+  display: none;
+  margin-top: 40px;
+}
+
+.blog-details h2 {
+  color: #a1222b;
   margin-bottom: 10px;
-  max-width: 900px;
+}
+
+.blog-details p {
+  line-height: 1.7;
+  color: #333;
+}
+
+.back-btn {
+  background: #a1222b;
+  color: #fff;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 
-	</div>
+<script>
+const blogContentData = {
+  blog1: `
+    <h2>"Created For Fellowship" – Weekly Broadcast</h2>
+    <p>
+      We give God all glory for the grace to begin our brand new broadcast,
+      <strong>“Created For Fellowship.”</strong>
+      Join us <strong>LIVE on Facebook every Wednesday at 7:00 p.m.</strong>
+    </p>
+  `,
 
+  blog2: `
+    <h2>Thank You to All TTRM Builders</h2>
+    <p>
+      We deeply appreciate all TTRM Builders for your financial and spiritual support.
+      This memorable achievement would not have been possible without you.
+      May God bless you richly and strengthen you spiritually in Jesus’ name.
+    </p>
+  `,
 
-</div>
+  blog3: `
+    <h2>Praise in the Parks – Temporarily Suspended</h2>
+    <p>
+      Due to COVID restrictions, our monthly outdoor program
+      <strong>Praise in the Parks</strong> is temporarily suspended.
+      We will notify everyone once restrictions are lifted.
+      We thank all volunteers who have dedicated their time, effort, and resources.
+    </p>
+  `,
+
+  blog4: `
+    <h2>Volunteer Opportunities</h2>
+    <p>
+      If you are interested in volunteering, kindly send us an email with your name
+      and the subject line <strong>“Volunteer”</strong>.
+      A team member will reach out to you.
+    </p>
+  `,
+
+  blog5: `
+    <h2>Stay Connected</h2>
+    <p>
+      Please continue to lift the Ministry in prayers.
+      Updates will be posted regularly — keep checking the site or subscribe to our NewsFeed.
+    </p>
+  `
+};
+
+document.querySelectorAll(".blog-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const blogId = card.getAttribute("data-blog");
+
+    document.getElementById("blogGrid").style.display = "none";
+    document.getElementById("blogDetails").style.display = "block";
+    document.getElementById("blogContent").innerHTML = blogContentData[blogId];
+  });
+});
+
+function goBack() {
+  document.getElementById("blogGrid").style.display = "grid";
+  document.getElementById("blogDetails").style.display = "none";
+}
+</script>
+
 </div>
 
 							</div>
